@@ -1,3 +1,6 @@
+ Uses
+ System.Strutils;
+
 Procedure TForm1.txtMesExit(Sender: TObject);
 Var
   Txt: String;
