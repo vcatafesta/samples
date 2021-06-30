@@ -1,5 +1,5 @@
  Uses
- System.Strutils;
+  System.Strutils;
 
 Procedure TForm1.txtMesExit(Sender: TObject);
 Var
