@@ -20,6 +20,7 @@ Var
   s: String;
 Begin
   sListMeses          := TStringList.Create;
+  For s In aMeses Do sListMeses.Add(s);
   ComboBox1.Items     := sListMeses;
   ComboBox1.ItemIndex := 0;
 End;
