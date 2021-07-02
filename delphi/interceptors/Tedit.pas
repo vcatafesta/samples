@@ -26,10 +26,10 @@ type
     Procedure DoEnter; Override;
     Procedure DoExit; Override;
     Procedure KeyPress(Var Key: Char); Override;
-    Procedure Clear; override;
+    Procedure Loaded; override;
   public
     Constructor Create(AOwner: TComponent); override;
-    Procedure Loaded; override;
+    Procedure Clear; override;
   Published
     { Published declarations }
     Property ColorFocus : TColor read FColorFocus write SetColorFocus;
