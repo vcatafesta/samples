@@ -29,6 +29,7 @@ type
     Procedure Clear; override;
   public
     Constructor Create(AOwner: TComponent); override;
+    Procedure Loaded; override;
   Published
     { Published declarations }
     Property ColorFocus : TColor read FColorFocus write SetColorFocus;
@@ -56,6 +57,12 @@ begin
   FColorFocus  := clInfoBk;
   FOnlyNumbers := true;
 End;
+
+procedure TEdit.Loaded;
+begin
+  inherited;
+  Self.font.Style := [fsBold];
+end;
 
 procedure TEdit.DoEnter;
 begin
