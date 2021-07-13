@@ -16,3 +16,4 @@ Begin
     Parent     := grp2;
   End;
   Application.ProcessMessages;
+End;
