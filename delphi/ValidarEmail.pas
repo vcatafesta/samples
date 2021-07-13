@@ -1,10 +1,37 @@
 Function ValidarEmail(Email: String): Boolean;
 Function CountInText(Find, Text: String): Integer;
+Function QtdeCaracter(cLetra, Texto: String): Integer;
+Function Ocorrencias(TextoProcurado, Texto: String): integer;
 
 Implementation
 
 {$R *.dfm}
 
+Function Ocorrencias(TextoProcurado, Texto: String): integer;
+Var
+  posicao: integer;
+Begin
+  result  := 0;
+  posicao := PosEx(TextoProcurado, Texto, 1);
+  While posicao > 0 Do
+  Begin
+    inc(result);
+    posicao := PosEx(TextoProcurado, Texto, posicao + length(TextoProcurado));
+  End;
+End;
+
+Function QtdeCaracter(cLetra, Texto: String): Integer;
+Var
+  i: Integer;
+Begin
+  Result := 0;
+  Texto  := Trim(Texto);
+  For i  := 1 To Length(Texto) Do
+  Begin
+    If Texto[i] = cLetra Then
+      Result := Result + 1;
+  End;
+End;
 
 Function CountInText(Find, Text: String): Integer;
 Begin
