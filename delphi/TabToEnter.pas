@@ -71,6 +71,7 @@ End;
 Constructor TTabToEnter.Create(AOWner: TComponent);
 Begin
   Inherited;
+  FAtivo := True;
 End;
 
 Destructor TTabToEnter.Destroy;
@@ -102,25 +103,28 @@ End;
 
 Procedure TTabToEnter.InsereEnter(Var Msg: TMsg; Var Handler: Boolean);
 Begin
-  If (Msg.message = WM_KEYDOWN) Then
-    If Not (Screen.ActiveControl Is TCustomMemo) And Not (Screen.ActiveControl Is TButtonControl) Then
-    Begin
-      If Not (Screen.ActiveControl Is TCustomControl) Then
+  If (FAtivo) Or Not (csDesigning In ComponentState) Then
+  Begin
+    If (Msg.message = WM_KEYDOWN) Then
+      If Not (Screen.ActiveControl Is TCustomMemo) And Not (Screen.ActiveControl Is TButtonControl) Then
       Begin
-        If (Msg.wParam = VK_Down) And
-          Not (Screen.ActiveControl Is TListBox) And Not (Screen.ActiveControl Is TComboBox) Then
-          Msg.wParam := VK_Tab;
-        If (Msg.wParam = VK_UP) And Not (Screen.ActiveControl Is TListBox) And Not (Screen.ActiveControl Is TComboBox) Then
+        If Not (Screen.ActiveControl Is TCustomControl) Then
         Begin
-          Msg.wParam := VK_CLEAR;
-          Screen.ActiveForm.Perform(WM_NextDlgCtl, 1, 0);
+          If (Msg.wParam = VK_Down) And
+            Not (Screen.ActiveControl Is TListBox) And Not (Screen.ActiveControl Is TComboBox) Then
+            Msg.wParam := VK_Tab;
+          If (Msg.wParam = VK_UP) And Not (Screen.ActiveControl Is TListBox) And Not (Screen.ActiveControl Is TComboBox) Then
+          Begin
+            Msg.wParam := VK_CLEAR;
+            Screen.ActiveForm.Perform(WM_NextDlgCtl, 1, 0);
+          End;
+          If (Msg.wParam = VK_Escape) And Not (Screen.ActiveForm = Application.MainForm) Then
+            Screen.ActiveForm.Close;
         End;
-        If (Msg.wParam = VK_Escape) And Not (Screen.ActiveForm = Application.MainForm) Then
-          Screen.ActiveForm.Close;
+        If (Msg.wParam = VK_Return) Then
+          Msg.wParam := VK_Tab;
       End;
-      If (Msg.wParam = VK_Return) Then
-        Msg.wParam := VK_Tab;
-    End;
+  End;
 End;
 
 Procedure TTabToEnter.SetFormPrincipal(Const Value: TComponentName);
