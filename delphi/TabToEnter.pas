@@ -1,3 +1,11 @@
+{
+no OnCreate do form principal: opcao 1
+Application.OnMessage := InsereEnter;
+
+no OnCreate do form principal: opcao 2
+Application.OnMessage := Execute;
+}
+
 Unit QDSTabToEnter;
 
 Interface
