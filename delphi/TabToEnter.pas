@@ -103,7 +103,7 @@ End;
 
 Procedure TTabToEnter.InsereEnter(Var Msg: TMsg; Var Handler: Boolean);
 Begin
-  If (FAtivo) Or Not (csDesigning In ComponentState) Then
+  If (FAtivo) Then
   Begin
     If (Msg.message = WM_KEYDOWN) Then
       If Not (Screen.ActiveControl Is TCustomMemo) And Not (Screen.ActiveControl Is TButtonControl) Then
